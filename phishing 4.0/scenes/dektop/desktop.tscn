@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0gem12anbl1"]
+
+[ext_resource type="Texture2D" uid="uid://dhflyqe3ndfmw" path="res://assets/giving up.png" id="1_5kjb0"]
+[ext_resource type="Texture2D" uid="uid://hmnl0d4yciw2" path="res://assets/bar.png" id="2_pds6v"]
+[ext_resource type="Texture2D" uid="uid://bj3ww1nxynecw" path="res://assets/UI/level_frame.png" id="3_w4wnt"]
+[ext_resource type="PackedScene" uid="uid://bs1nhpbg3v24y" path="res://scenes/power ups/Dash.tscn" id="4_lsegw"]
+
+[node name="desktop" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="remaining_blue" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.75, 0.76)
+texture = ExtResource("1_5kjb0")
+centered = false
+
+[node name="tool_bar" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+texture = ExtResource("2_pds6v")
+centered = false
+
+[node name="window_music" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(10, 0)
+scale = Vector2(0.95, 1)
+texture = ExtResource("3_w4wnt")
+centered = false
+
+[node name="Dash" parent="." instance=ExtResource("4_lsegw")]
+position = Vector2(600, 75)
