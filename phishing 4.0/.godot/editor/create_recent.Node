@@ -1,4 +1,7 @@
-Timer
 Label
+<<<<<<< Updated upstream
 RichTextLabel
+=======
+Timer
 Sprite2D
+>>>>>>> Stashed changes
