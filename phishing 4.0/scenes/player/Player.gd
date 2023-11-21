@@ -16,7 +16,7 @@ var follow = 1
 var is_dashing : bool = false # check if we're dashing
 var can_dash : bool = true # check if we can dash? 
 var is_wall_jumping : bool = false
-var move_lock : bool = false
+@export var move_lock : bool = false
 var is_bold : bool = false
 var invincible : bool = false
 var hit_lock : bool = false
@@ -46,7 +46,7 @@ var facingDirection = Vector2.RIGHT
 
 func _physics_process(delta):
 	#print(self.modulate.g)
-	print(delta)
+	#print(delta)
 	
 	
 	var was_on_floor = is_on_floor()
@@ -74,7 +74,7 @@ func _physics_process(delta):
 
 			# Apply the wall jump force.
 			velocity = wall_jump_direction.normalized() * wall_jump_pushback
-			print(velocity.x)
+			#print(velocity.x)
 			
 			
 #	if is_dashing == true and is_dashing_bold == true:
@@ -208,7 +208,7 @@ func wall_slide(delta):
 func bold():
 	if Input.is_action_just_pressed("bold") and is_dashing == false:
 		is_bold = true
-		print("yes")
+		#print("yes")
 	if Input.is_action_just_pressed("bold") and is_dashing == true:
 		is_dashing_bold = true
 	if Input.is_action_just_released("bold") and is_bold:
