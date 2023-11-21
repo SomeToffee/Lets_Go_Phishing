@@ -36,12 +36,7 @@ func _on_area_2d_body_entered(_body):
 	#clip_mask.add_child(open_level)
 	are_in_level = true
 	position_node.add_child(open_level)
-#	open_level.position.x = 10
-#	open_level.position.y = 14
-	#player.position.x = 315
-	#player.position.y = 180
 	camera.enabled = true
-	#player.z_index = 5
 	player.queue_free()
 
 

@@ -14,6 +14,7 @@ var tween = create_tween()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	playhead.global_position.x = -309
+	
 
 func _physics_process(delta):
 	#print(player.global_position.y)
