@@ -470,3 +470,5 @@ scale = Vector2(1, 2)
 texture = ExtResource("2_gicns")
 centered = false
 offset = Vector2(0, -120)
+
+[node name="fade_timer" type="Timer" parent="."]
