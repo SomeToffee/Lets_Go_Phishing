@@ -204,6 +204,7 @@ collision_mask = 523
 script = ExtResource("1_k55ba")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_iam20")
 animation = &"roll"
 

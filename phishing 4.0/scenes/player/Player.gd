@@ -38,7 +38,7 @@ var animation_locked : bool = false
 var direction : Vector2 = Vector2.ZERO
 var dash_direction : Vector2 = Vector2.ZERO
 var facingDirection = Vector2.RIGHT
-
+@export var stop = false
 
 #func _ready():# -> void:
 #	self.position = global.music_spawn_point
@@ -47,66 +47,67 @@ var facingDirection = Vector2.RIGHT
 func _physics_process(delta):
 	#print(self.modulate.g)
 	#print(delta)
-	
-	
-	var was_on_floor = is_on_floor()
-	move_and_slide()
-	
-	if was_on_floor and !is_on_floor():
-		cayote_time.start()
-	
-	if move_lock == true:
-		await get_tree().create_timer(0.2).timeout
-		move_lock = false
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() || !cayote_time.is_stopped():
-			velocity.y = jump_velocity
-		if is_on_wall():
-			move_lock = true
-			# Determine the wall jump direction based on player input.
-			var wall_jump_direction = Vector2.ZERO
-			if Input.is_action_pressed("left"):
-				wall_jump_direction.x = 1  # Jump to the right
-			elif Input.is_action_pressed("right"):
-				wall_jump_direction.x = -1  # Jump to the left
-			wall_jump_direction.y = -1  # Jump upward
+	if stop == true:
+		animated_sprite_idle.play("idle")
+	if stop == false:
+		var was_on_floor = is_on_floor()
+		move_and_slide()
+		
+		if was_on_floor and !is_on_floor():
+			cayote_time.start()
+		
+		if move_lock == true:
+			await get_tree().create_timer(0.2).timeout
+			move_lock = false
+		# Handle Jump.
+		if Input.is_action_just_pressed("jump"):
+			if is_on_floor() || !cayote_time.is_stopped():
+				velocity.y = jump_velocity
+			if is_on_wall():
+				move_lock = true
+				# Determine the wall jump direction based on player input.
+				var wall_jump_direction = Vector2.ZERO
+				if Input.is_action_pressed("left"):
+					wall_jump_direction.x = 1  # Jump to the right
+				elif Input.is_action_pressed("right"):
+					wall_jump_direction.x = -1  # Jump to the left
+				wall_jump_direction.y = -1  # Jump upward
 
-			# Apply the wall jump force.
-			velocity = wall_jump_direction.normalized() * wall_jump_pushback
-			#print(velocity.x)
+				# Apply the wall jump force.
+				velocity = wall_jump_direction.normalized() * wall_jump_pushback
+				#print(velocity.x)
+				
+				
+	#	if is_dashing == true and is_dashing_bold == true:
+	#		self.modulate.g = 0
+	#		velocity = dash_direction.normalized() * 1500
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		if is_dashing == false or is_dashing_bold == true:
+			if not is_on_floor():
+				velocity.y += gravity * delta
+			direction = Input.get_vector("left", "right", "up", "down")
+			
+	#		if is_on_floor():
+	#			speed = 150
+	#		if not is_on_floor():
+	#			speed = 100
+
 			
 			
-#	if is_dashing == true and is_dashing_bold == true:
-#		self.modulate.g = 0
-#		velocity = dash_direction.normalized() * 1500
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	if is_dashing == false or is_dashing_bold == true:
-		if not is_on_floor():
-			velocity.y += gravity * delta
-		direction = Input.get_vector("left", "right", "up", "down")
-		
-#		if is_on_floor():
-#			speed = 150
-#		if not is_on_floor():
-#			speed = 100
+			if move_lock == false and hit_lock == false:
+				if direction:
+					velocity.x = direction.x * speed
+				else:
+					velocity.x = move_toward(velocity.x, 0, speed)
 
 		
-		
-		if move_lock == false and hit_lock == false:
-			if direction:
-				velocity.x = direction.x * speed
-			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
-
-	
-	update_animation()
-	update_animation_direction()
-	handle_dash(delta)
-	bold()
-	wall_slide(delta)
-	facing_direction()
+		update_animation()
+		update_animation_direction()
+		handle_dash(delta)
+		bold()
+		wall_slide(delta)
+		facing_direction()
 	
 	
 	
@@ -261,7 +262,6 @@ func _on_hurt_box_body_entered(body):
 			HP = 3
 	await get_tree().create_timer(1.5).timeout
 	invincible = false
-
 
 func _input(event : InputEvent):
 	if(event.is_action_pressed("down")):

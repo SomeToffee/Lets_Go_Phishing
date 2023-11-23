@@ -15,7 +15,7 @@ var program_open = false
 
 func _ready():
 	playhead.global_position.x = -309
-
+	player.stop = true
 	$AnimationPlayer.play("fade_in_splash")
 
 
@@ -29,10 +29,10 @@ func _physics_process(delta):
 		playhead.global_position.y = follow
 		if playhead.global_position.x > 17031:
 			playhead.global_position.x = -309
-
-
+	print(player.stop)
 
 
 
 func _on_animation_player_animation_finished(fade_in_splash):
 	program_open = true
+	player.stop = false
