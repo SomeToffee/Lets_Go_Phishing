@@ -38,7 +38,7 @@ var got_hit = false
 var animation_locked : bool = false
 var direction : Vector2 = Vector2.ZERO
 var dash_direction : Vector2 = Vector2.ZERO
-var facingDirection = Vector2.RIGHT
+@export var facingDirection = Vector2.RIGHT
 @export var stop = false
 
 #func _ready():# -> void:
