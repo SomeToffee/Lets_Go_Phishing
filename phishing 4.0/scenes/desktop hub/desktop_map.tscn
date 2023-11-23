@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dofidtre1pyx2"]
+[gd_scene load_steps=18 format=3 uid="uid://dofidtre1pyx2"]
 
 [ext_resource type="Script" path="res://scenes/desktop hub/desktop_map.gd" id="1_u5xqv"]
 [ext_resource type="PackedScene" uid="uid://cmrt30o7muylv" path="res://scenes/player/Player.tscn" id="2_fjy1n"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bwynuwjhil7qx" path="res://assets/interactables/cog1.png" id="7_wvthi"]
 [ext_resource type="PackedScene" uid="uid://ctqhsce3g273f" path="res://scenes/platforms/one_way_platform.tscn" id="11_45vje"]
 [ext_resource type="PackedScene" uid="uid://cd52tyrm0inde" path="res://scenes/platforms/bounce_pad.tscn" id="11_en0dp"]
+[ext_resource type="PackedScene" uid="uid://nkx0ce5n8gi2" path="res://scenes/platforms/moving_platforms.tscn" id="11_ty2ou"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hhliv"]
 radius = 18.0
@@ -196,6 +197,9 @@ position = Vector2(124, 89)
 [node name="bounce_pad" parent="." instance=ExtResource("11_en0dp")]
 position = Vector2(404, 279)
 scale = Vector2(2, 2)
+
+[node name="moving_platforms" parent="." instance=ExtResource("11_ty2ou")]
+position = Vector2(188, 283)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Settings_icon" to="." method="_on_area_2d_body_entered"]

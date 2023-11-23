@@ -24,6 +24,7 @@ var is_dashing_bold : bool = false
 #var dash_direction : Vector2 # get the direction we'll dash in
 #var dash_direction = Vector2(1, 0)
 var last_moved_dir = "start"
+var got_hit = false
 #signal player_moved
 
 
@@ -100,7 +101,9 @@ func _physics_process(delta):
 					velocity.x = direction.x * speed
 				else:
 					velocity.x = move_toward(velocity.x, 0, speed)
-
+		if got_hit == true:
+			got_hit = false
+			getting_hit()
 		
 		update_animation()
 		update_animation_direction()
@@ -237,6 +240,16 @@ func bold():
 #hurtbox
 
 func _on_hurt_box_body_entered(body):
+	got_hit = true
+func _input(event : InputEvent):
+	if(event.is_action_pressed("down")):
+		position.y += 1
+
+func frame_freeze(time_control, duration):
+	Engine.time_scale = time_control
+	await get_tree().create_timer(duration * time_control).timeout
+	Engine.time_scale = 1
+func getting_hit():
 	if invincible == false:
 		HP = HP - 0.1
 		print(HP)
@@ -244,9 +257,9 @@ func _on_hurt_box_body_entered(body):
 		
 		
 		if HP > 0:
-			frame_freeze(0.05, 0.7)
+			frame_freeze(0.05, 1)
 			hit_lock = true
-			var knock_back = 150
+			var knock_back = 400
 			if direction.x > 0:
 				velocity.x = -knock_back
 				velocity.y = -knock_back
@@ -263,11 +276,3 @@ func _on_hurt_box_body_entered(body):
 	await get_tree().create_timer(1.5).timeout
 	invincible = false
 
-func _input(event : InputEvent):
-	if(event.is_action_pressed("down")):
-		position.y += 1
-
-func frame_freeze(time_control, duration):
-	Engine.time_scale = time_control
-	await get_tree().create_timer(duration * time_control).timeout
-	Engine.time_scale = 1

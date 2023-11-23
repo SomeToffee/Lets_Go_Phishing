@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://hl0ww7arupjf"]
+[gd_scene load_steps=68 format=3 uid="uid://hl0ww7arupjf"]
 
 [ext_resource type="Texture2D" uid="uid://bqq2fwny5ts4g" path="res://assets/maps/music program/Scale_Maestro_v2.0.png" id="1_33oph"]
 [ext_resource type="Script" path="res://scenes/music level/music_program_level.gd" id="1_ta0dh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cmrt30o7muylv" path="res://scenes/player/Player.tscn" id="5_a8e2a"]
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="6_fyg2a"]
 [ext_resource type="PackedScene" uid="uid://cyv64eyqamue4" path="res://scenes/platforms/tile_maps.tscn" id="7_anw5m"]
+[ext_resource type="PackedScene" uid="uid://bxn0nfmbirlds" path="res://scenes/platforms/rotating hazard.tscn" id="8_ke1lc"]
 
 [sub_resource type="Animation" id="Animation_306cq"]
 length = 0.001
@@ -312,6 +313,7 @@ process_callback = 0
 position_smoothing_speed = 10.0
 
 [node name="splash_screen" type="Sprite2D" parent="Player/Camera2D"]
+visible = false
 z_index = 4
 position = Vector2(13.3333, -0.741089)
 scale = Vector2(4.74537, 2.90509)
@@ -568,6 +570,16 @@ shape = SubResource("RectangleShape2D_sy46l")
 
 [node name="tile_sets" parent="Node2D" instance=ExtResource("7_anw5m")]
 
+[node name="TileMap2" parent="Node2D/tile_sets" index="0"]
+layer_0/tile_data = PackedInt32Array(196614, 131074, 2, 196615, 196610, 2, 262150, 131074, 3, 1376258, 131074, 1, 1376259, 131074, 1, 1310722, 65538, 0, 1310723, 131074, 0, 1310721, 2, 0, 1376257, 2, 1, 1441793, 131074, 5, 1441792, 65538, 5, 1441794, 65538, 1, 1441795, 65538, 1, 1507330, 65538, 1, 1507329, 65538, 1, 1507328, 65538, 1, 1572863, 65538, 1, 1507327, 65538, 1, 1441791, 131074, 0, 1441790, 131074, 0, 1507326, 65538, 1, 1572862, 65538, 1, 1507325, 2, 1, 1572861, 2, 2, 1638398, 65538, 3, 1638399, 131074, 3, 1572864, 65538, 3, 1572865, 131074, 3, 1572866, 65538, 3, 1572867, 131074, 3, 1376260, 196610, 1, 1441796, 196610, 2, 1507332, 196610, 1, 1507331, 131074, 1, 1310724, 196610, 0)
+
+[node name="TileMap" parent="Node2D/tile_sets" index="1"]
+layer_0/tile_data = PackedInt32Array(2621462, 0, 0, 2621463, 65536, 0, 2621464, 131072, 0, 2555931, 0, 0, 2555932, 65536, 0, 2555933, 131072, 0, 2687010, 0, 0, 2687011, 65536, 0, 2687012, 131072, 0, 2687015, 393216, 0, 2687016, 458752, 0, 2687017, 524288, 0, 2424864, 458752, 1, 2424867, 131072, 3, 2490403, 131072, 4, 2424868, 196608, 3, 2490404, 196608, 4, 2359317, 393216, 3, 2359318, 458752, 3, 2359319, 524288, 3, 2424853, 393216, 4, 2490389, 327680, 6, 2490388, 458752, 3, 2490387, 458752, 3, 2490386, 458752, 3, 2490385, 262144, 6, 2424849, 524288, 4, 2359313, 524288, 4, 2293777, 524288, 4, 2228241, 524288, 3, 2228240, 458752, 3, 2228239, 393216, 3)
+
+[node name="rotating hazard" parent="." instance=ExtResource("8_ke1lc")]
+position = Vector2(222.667, 630.667)
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Node2D/tile_sets"]
+[editable path="rotating hazard"]

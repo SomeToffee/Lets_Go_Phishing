@@ -17,7 +17,7 @@ func _ready():
 	playhead.global_position.x = -309
 	player.stop = true
 	$AnimationPlayer.play("fade_in_splash")
-
+	$Player/Camera2D/splash_screen.visible = true
 
 func _physics_process(delta):
 	print(original_position)

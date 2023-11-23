@@ -1,10 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxn0nfmbirlds"]
+[gd_scene load_steps=6 format=3 uid="uid://bxn0nfmbirlds"]
 
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="1_rk41t"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_3eh8w"]
-a = Vector2(-2.79753e-06, -64)
-b = Vector2(2.79753e-06, 64)
 
 [sub_resource type="Animation" id="Animation_5u6ex"]
 resource_name = "rotating"
@@ -23,31 +19,43 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_hhwjv"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aswb8"]
 _data = {
+"RESET": SubResource("Animation_hhwjv"),
 "rotating": SubResource("Animation_5u6ex")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgjcr"]
+size = Vector2(128, 4)
 
 [node name="rotating hazard" type="Node2D"]
 
 [node name="AnimatableBody2D" type="Node2D" parent="."]
+rotation = 3.63994
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+root_node = NodePath("../..")
+autoplay = "rotating"
+libraries = {
+"": SubResource("AnimationLibrary_aswb8")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 position = Vector2(2.38419e-07, 1.19209e-07)
 scale = Vector2(1.01563, 0.046875)
 texture = ExtResource("1_rk41t")
 
-[node name="Area2D" type="AnimatableBody2D" parent="AnimatableBody2D"]
+[node name="Area2D" type="AnimatableBody2D" parent="AnimatableBody2D/Sprite2D"]
+position = Vector2(-2.3475e-07, -2.54313e-06)
+scale = Vector2(0.98461, 21.3333)
 collision_layer = 128
 collision_mask = 128
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="AnimatableBody2D/Area2D"]
-rotation = 1.5708
-shape = SubResource("SegmentShape2D_3eh8w")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D/Area2D"]
-root_node = NodePath("../../..")
-autoplay = "rotating"
-libraries = {
-"": SubResource("AnimationLibrary_aswb8")
-}
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AnimatableBody2D/Sprite2D/Area2D"]
+position = Vector2(-5.72205e-06, -7.10543e-15)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_mgjcr")
+debug_color = Color(0.984314, 0, 0.32549, 0.419608)
