@@ -16,7 +16,7 @@ var follow = 1
 var is_dashing : bool = false # check if we're dashing
 var can_dash : bool = true # check if we can dash? 
 var is_wall_jumping : bool = false
-@export var move_lock : bool = false
+var move_lock : bool = false
 var is_bold : bool = false
 var invincible : bool = false
 var hit_lock : bool = false
@@ -28,7 +28,7 @@ var got_hit = false
 #signal player_moved
 
 
-@onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_roll : AnimatedSprite2D = $roll
 @onready var animated_sprite_idle : AnimatedSprite2D = $idle
 @onready var animated_sprite_wall_splat : AnimatedSprite2D = $wall_splat
 @onready var cayote_time = $cayote_time
@@ -40,6 +40,7 @@ var direction : Vector2 = Vector2.ZERO
 var dash_direction : Vector2 = Vector2.ZERO
 @export var facingDirection = Vector2.RIGHT
 @export var stop = false
+var input_vector = Vector2.ZERO
 
 #func _ready():# -> void:
 #	self.position = global.music_spawn_point
@@ -49,9 +50,11 @@ func _physics_process(delta):
 	#print(self.modulate.g)
 	#print(delta)
 	if stop == true:
-		animated_sprite_idle.play("idle")
+		animated_sprite_roll.play("roll")
 	if stop == false:
 		var was_on_floor = is_on_floor()
+		
+		fish_hurtbox_manager()
 		move_and_slide()
 		
 		if was_on_floor and !is_on_floor():
@@ -106,43 +109,61 @@ func _physics_process(delta):
 			getting_hit()
 		
 		update_animation()
-		update_animation_direction()
+#		update_animation_direction()
 		handle_dash(delta)
 		bold()
 		wall_slide(delta)
 		facing_direction()
-	
+		player_flip()
 	
 	
 func update_animation():
 	if not animation_locked:
-		if direction.x != 0:
-			if direction.x > 0:
-				last_moved_dir = "right"
-			if direction.x < 0:
-				last_moved_dir = "left"
-			animated_sprite.visible = true
-			animated_sprite_idle.visible = false
-			animated_sprite.play("roll")
-		else:
-			if last_moved_dir == "left":
-				animated_sprite_idle.flip_h = true
+		if !is_on_wall():
+			if direction.x != 0:
+				animated_sprite_roll.visible = true
+				animated_sprite_idle.visible = false
+				animated_sprite_wall_splat.visible = false
+				animated_sprite_roll.play("roll")
+			elif direction.x == 0 and !is_on_floor() and !is_on_wall():
+#				if last_moved_dir == "left":
+#					animated_sprite_idle.flip_h = true
+#				else:
+#					animated_sprite_idle.flip_h = false
+				animated_sprite_roll.visible = true
+				animated_sprite_idle.visible = false
+				animated_sprite_wall_splat.visible = false
+				animated_sprite_roll.play("roll")
 			else:
-				animated_sprite_idle.flip_h = false
-			animated_sprite.visible = false
-			animated_sprite_idle.visible = true
-			animated_sprite_idle.play("idle")
+#				if last_moved_dir == "left":
+#					animated_sprite_idle.flip_h = true
+#				else:
+#					animated_sprite_idle.flip_h = false
+				animated_sprite_roll.visible = false
+				animated_sprite_idle.visible = true
+				animated_sprite_wall_splat.visible = false
+				animated_sprite_idle.play("idle")
+		if is_on_wall() and !is_on_floor():
+			animated_sprite_roll.visible = false
+			animated_sprite_idle.visible = false
+			animated_sprite_wall_splat.visible = true
+			animated_sprite_wall_splat.play("default")
+			await get_tree().create_timer(0.2).timeout
+			animated_sprite_wall_splat.set_frame(2)
+		
 
-func update_animation_direction():
-	if not animation_locked:
-		if direction.x > 0:
-			
-			animated_sprite.flip_h = false
-		elif direction.x < 0:
-			animated_sprite.flip_h = true
+#func update_animation_direction():
+#	if not animation_locked:
+#		if facingDirection.x > 0 and self.scale.x != 0.9:
+#			self.scale.x = 0.9
+#			#animated_sprite_roll.flip_h = false
+#		elif facingDirection.x < 0 and self.scale.x != 0.9:
+#			self.scale.x = -0.9
+#		else:
+#			self.scale.x = 0.9
+#			#animated_sprite_roll.flip_h = true
 #omnidirectional dash
 func facing_direction():
-	var input_vector = Vector2.ZERO
 	if Input.is_action_pressed("right"):
 		input_vector.x += 1
 	if Input.is_action_pressed("left"):
@@ -150,7 +171,20 @@ func facing_direction():
 
 	if input_vector != Vector2.ZERO:
 		input_vector = input_vector.normalized()
-		facingDirection = input_vector  # Update facing direction based on input
+	print(input_vector)
+	if direction.x > 0:
+		last_moved_dir = "right"
+	if direction.x < 0:
+		last_moved_dir = "left"
+	
+func player_flip():
+#	if last_moved_dir == "right" and self.scale.x != 0.9:
+#		self.scale.x = 0.9
+#	if last_moved_dir == "left" and self.scale.x != -0.9:
+#		self.scale.x = -0.9
+#	print(self.scale.x)
+	if Input.is_action_just_pressed("paste"):
+		self.scale.x *= -1
 
 func handle_dash(delta):
 	if is_on_floor() or is_on_wall():
@@ -173,42 +207,20 @@ func handle_dash(delta):
 		if is_dashing_bold == false:
 			velocity = velocity * 0.1
 			is_dashing = false
-#		else:
-#			velocity += dash_direction.normalized() * dash_speed
-#			if is_on_floor():
-#				velocity = dash_direction.normalized() * 0
-#				is_dashing = false
-#				is_dashing_bold = false
-#				is_bold = true
 
 func wall_slide(delta):
-
-	
-	
-	
 	if is_on_wall() and !is_on_floor():
 		if Input.is_action_pressed("right") or Input.is_action_pressed("left"):
 			wall_sliding = true
-#			animated_sprite_wall_splat.visible = true
-#			if Input.is_action_pressed("right"):
-#				animated_sprite_wall_splat.play("default")
-#			if Input.is_action_pressed("left"):
-#				animated_sprite_wall_splat.flip_h = true
-#				animated_sprite_wall_splat.play("default")
-#			else:
-#				animated_sprite_wall_splat.visible = false
 		else:
 			wall_sliding = false
 	else:
 		wall_sliding = false
 		
-#	if animated_sprite_wall_splat.visible == true:
-#		animated_sprite.visible = false
-#		animated_sprite_idle.visible = false
-		
 	if wall_sliding:
 		velocity.y += (wall_slide_gravity * delta)
 		velocity.y = min(velocity.y, wall_slide_gravity)
+
 func bold():
 	if Input.is_action_just_pressed("bold") and is_dashing == false:
 		is_bold = true
@@ -234,13 +246,12 @@ func bold():
 		velocity.y = 2000
 		velocity.x = 0
 		self.modulate.g = 0
-		
-		
 
 #hurtbox
 
 func _on_hurt_box_body_entered(body):
 	got_hit = true
+	
 func _input(event : InputEvent):
 	if(event.is_action_pressed("down")):
 		position.y += 1
@@ -249,6 +260,7 @@ func frame_freeze(time_control, duration):
 	Engine.time_scale = time_control
 	await get_tree().create_timer(duration * time_control).timeout
 	Engine.time_scale = 1
+	
 func getting_hit():
 	if invincible == false:
 		HP = HP - 1
@@ -257,9 +269,9 @@ func getting_hit():
 		
 		
 		if HP > 0:
-			frame_freeze(0.005, 0.5)
+			frame_freeze(0.005, 0.9)
 			hit_lock = true
-			var knock_back = 400
+			var knock_back = 300
 			if direction.x > 0:
 				velocity.x = -knock_back
 				velocity.y = -knock_back
@@ -274,6 +286,28 @@ func getting_hit():
 			
 			self.global_position = global.music_spawn_point
 			HP = 3
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(1).timeout
 	invincible = false
 
+func fish_hurtbox_manager():
+	if animated_sprite_idle.visible == true:
+		$idle_collision.disabled = false
+		$hurt_box/idle_box.disabled = false
+		$roll_collision.disabled = true
+		$hurt_box/roll_box.disabled = true
+		$wall_splat_collison.disabled = true
+		$hurt_box/wall_splat_box.disabled = true
+	elif animated_sprite_roll.visible == true:
+		$idle_collision.disabled = true
+		$hurt_box/idle_box.disabled = true
+		$roll_collision.disabled = false
+		$hurt_box/roll_box.disabled = false
+		$wall_splat_collison.disabled = true
+		$hurt_box/wall_splat_box.disabled = true
+	elif animated_sprite_wall_splat.visible == true:
+		$idle_collision.disabled = true
+		$hurt_box/idle_box.disabled = true
+		$roll_collision.disabled = true
+		$hurt_box/roll_box.disabled = true
+		$wall_splat_collison.disabled = false
+		$hurt_box/wall_splat_box.disabled = false

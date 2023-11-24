@@ -305,7 +305,6 @@ libraries = {
 
 [node name="level_song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ufujs")
-volume_db = -28.108
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-30.6667, 582.667)

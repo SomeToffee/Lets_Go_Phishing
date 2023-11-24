@@ -9,3 +9,5 @@ res://scenes/global/global.tscn
 res://global.gd
 res://scenes/player/Player.gd
 res://save_point.gd
+res://scenes/music level/music_program_level.gd
+res://scenes/global/save_point.tscn

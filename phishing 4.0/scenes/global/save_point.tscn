@@ -101,12 +101,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_b6wrp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u7um7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b6wrp")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_0lgpw")
 }, {
 "duration": 1.0,
@@ -153,7 +147,7 @@ script = ExtResource("1_hlnyy")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mtw0k")
 autoplay = "default"
-frame_progress = 0.935256
+frame_progress = 0.454856
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 512

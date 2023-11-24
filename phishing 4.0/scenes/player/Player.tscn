@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cmrt30o7muylv"]
+[gd_scene load_steps=38 format=3 uid="uid://cmrt30o7muylv"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_k55ba"]
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="3_f33wk"]
@@ -160,6 +160,12 @@ animations = [{
 radius = 6.0
 height = 40.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_velkc"]
+size = Vector2(30, 27.7778)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74fsu"]
+size = Vector2(8.88889, 33.3333)
+
 [sub_resource type="Curve" id="Curve_hoatr"]
 min_value = -360.0
 max_value = 360.0
@@ -197,33 +203,49 @@ scale_curve = SubResource("CurveTexture_hnk3j")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrmq1"]
 size = Vector2(34.4444, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vws5u"]
+size = Vector2(30, 27.7778)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w8jk"]
+size = Vector2(8.88889, 33.3333)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.9, 0.9)
 collision_layer = 523
 collision_mask = 523
 script = ExtResource("1_k55ba")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="roll" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_iam20")
 animation = &"roll"
+frame_progress = 0.897073
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, 6.66667)
 sprite_frames = SubResource("SpriteFrames_ju2mj")
 animation = &"idle"
 
 [node name="wall_splat" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(12.2222, 5.55556)
+position = Vector2(11.1111, 5.55556)
 sprite_frames = SubResource("SpriteFrames_ycp4q")
 frame = 2
 frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="idle_collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12.2222)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_an0od")
+
+[node name="roll_collision" type="CollisionShape2D" parent="."]
+position = Vector2(2.77778, 3.88889)
+shape = SubResource("RectangleShape2D_velkc")
+
+[node name="wall_splat_collison" type="CollisionShape2D" parent="."]
+position = Vector2(13.3333, 1.11111)
+shape = SubResource("RectangleShape2D_74fsu")
 
 [node name="dash_particles" type="GPUParticles2D" parent="."]
 visible = false
@@ -242,8 +264,16 @@ collision_layer = 128
 collision_mask = 128
 collision_priority = 50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_box"]
+[node name="idle_box" type="CollisionShape2D" parent="hurt_box"]
 position = Vector2(0.555555, 12.2222)
 shape = SubResource("RectangleShape2D_mrmq1")
+
+[node name="roll_box" type="CollisionShape2D" parent="hurt_box"]
+position = Vector2(2.77778, 3.88889)
+shape = SubResource("RectangleShape2D_vws5u")
+
+[node name="wall_splat_box" type="CollisionShape2D" parent="hurt_box"]
+position = Vector2(13.3333, 1.11111)
+shape = SubResource("RectangleShape2D_2w8jk")
 
 [connection signal="body_entered" from="hurt_box" to="." method="_on_hurt_box_body_entered"]

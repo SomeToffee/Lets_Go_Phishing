@@ -47,7 +47,6 @@ func set_playhead_pos():
 	if playhead.global_position.x > 17031:
 		playhead.global_position.x = -309
 
-
 func _on_animation_player_animation_finished(fade_in_splash):
 	program_open = true
 	player.stop = false

@@ -305,7 +305,6 @@ libraries = {
 
 [node name="level_song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ufujs")
-volume_db = -28.108
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-30.6667, 582.667)
@@ -328,6 +327,17 @@ texture = ExtResource("6_fyg2a")
 
 [node name="Player" parent="." instance=ExtResource("5_a8e2a")]
 position = Vector2(-30.6667, 582.667)
+speed = 200.0
+jump_velocity = -300.0
+wall_jump_pushback = 500.0
+wall_slide_gravity = 50.0
+wall_sliding = false
+gravity = 700.0
+dash_speed = 700
+HP = 3
+move_lock = false
+facingDirection = Vector2(1, 0)
+stop = false
 
 [node name="playhead" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.596078)
