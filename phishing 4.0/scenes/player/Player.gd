@@ -251,13 +251,13 @@ func frame_freeze(time_control, duration):
 	Engine.time_scale = 1
 func getting_hit():
 	if invincible == false:
-		HP = HP - 0.1
+		HP = HP - 1
 		print(HP)
 		invincible = true
 		
 		
 		if HP > 0:
-			frame_freeze(0.05, 1)
+			frame_freeze(0.005, 0.5)
 			hit_lock = true
 			var knock_back = 400
 			if direction.x > 0:
@@ -271,7 +271,8 @@ func getting_hit():
 			await get_tree().create_timer(0.5).timeout
 			hit_lock = false
 		if HP < 1:
-			position = global.music_spawn_point
+			
+			self.global_position = global.music_spawn_point
 			HP = 3
 	await get_tree().create_timer(1.5).timeout
 	invincible = false

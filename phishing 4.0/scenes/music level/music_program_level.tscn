@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://hl0ww7arupjf"]
+[gd_scene load_steps=69 format=3 uid="uid://hl0ww7arupjf"]
 
 [ext_resource type="Texture2D" uid="uid://bqq2fwny5ts4g" path="res://assets/maps/music program/Scale_Maestro_v2.0.png" id="1_33oph"]
 [ext_resource type="Script" path="res://scenes/music level/music_program_level.gd" id="1_ta0dh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="6_fyg2a"]
 [ext_resource type="PackedScene" uid="uid://cyv64eyqamue4" path="res://scenes/platforms/tile_maps.tscn" id="7_anw5m"]
 [ext_resource type="PackedScene" uid="uid://bxn0nfmbirlds" path="res://scenes/platforms/rotating hazard.tscn" id="8_ke1lc"]
+[ext_resource type="PackedScene" uid="uid://bn7wtkca1pr3x" path="res://scenes/global/save_point.tscn" id="9_q561o"]
 
 [sub_resource type="Animation" id="Animation_306cq"]
 length = 0.001
@@ -580,6 +581,12 @@ layer_0/tile_data = PackedInt32Array(2621462, 0, 0, 2621463, 65536, 0, 2621464, 
 
 [node name="rotating hazard" parent="." instance=ExtResource("8_ke1lc")]
 position = Vector2(222.667, 630.667)
+
+[node name="AnimatableBody2D" parent="rotating hazard" index="0"]
+rotation = 0.0
+
+[node name="save_point" parent="." instance=ExtResource("9_q561o")]
+position = Vector2(471.333, 666)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
