@@ -1,8 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1700844958
-global.gd::GDScript::-1::1697994400::0::1::::<>Node2D<>::
+::res://::1701363064
+global.gd::GDScript::-1::1700845766::0::1::::<>Node2D<>::
 icon.svg::CompressedTexture2D::4286978566499956621::1697994400::1700590368::1::::<><>::
-save_point.gd::GDScript::-1::1697994400::0::1::::<>Node2D<>::
+save_point.gd::GDScript::-1::1700845867::0::1::::<>Node2D<>::
 ::res://assets/::1700590369
 bar.png::CompressedTexture2D::516904722221816727::1697994400::1700590368::1::::<><>::
 giving up.png::CompressedTexture2D::7661617439132485674::1697994400::1700590368::1::::<><>::
@@ -43,9 +43,9 @@ FF button.png::CompressedTexture2D::376783573317618361::1697994400::1700590368::
 level window.png::CompressedTexture2D::1283110638870219249::1697994400::1700590368::1::::<><>::
 level_frame.png::CompressedTexture2D::3077299301622999794::1697994400::1700590368::1::::<><>::
 power_up_window.png::CompressedTexture2D::6196829659993186583::1697994400::1700590368::1::::<><>::
-::res://misc/::1700789212
+::res://misc/::1701119691
 Menu.gd::GDScript::-1::1697994400::0::1::::<>Control<>::
-root.tscn::PackedScene::699228509157034548::1700789212::0::1::::<><>::res://misc/Menu.gd
+root.tscn::PackedScene::699228509157034548::1701119691::0::1::::<><>::res://misc/Menu.gd
 tile_level.tscn::PackedScene::4805652400543237238::1697994400::0::1::::<><>::
 ::res://misc/test assets/::1700590368
 Tiles.png::CompressedTexture2D::1701443543620464388::1697994400::1700590368::1::::<><>::
@@ -54,28 +54,28 @@ Maestro.ogg::AudioStreamOggVorbis::2152521865920384834::1697994400::1700590368::
 ::res://scenes/::1697994400
 ::res://scenes/dektop/::1700603458
 desktop.tscn::PackedScene::262548091570195420::1700603458::0::1::::<><>::uid://dhflyqe3ndfmw
-::res://scenes/desktop hub/::1700789212
+::res://scenes/desktop hub/::1701119691
 desktop_map.gd::GDScript::-1::1700761313::0::1::::<>Node2D<>::
-desktop_map.tscn::PackedScene::8152719868528334177::1700789212::0::1::::<><>::res://scenes/desktop hub/desktop_map.gd<>uid://cmrt30o7muylv::::res://scenes/player/Player.tscn<>uid://d0gem12anbl1::::res://scenes/dektop/desktop.tscn<>uid://b1p10cth3sm3h::::res://assets/maps/windows/bg.png<>uid://xdb64wsfjr14::::res://assets/interactables/scale_maestro.png<>uid://capimax86vw1o::::res://assets/fonts/Windows Regular.ttf<>uid://c3xfx8ky602w7::::res://assets/interactables/cog0.png<>uid://bwynuwjhil7qx::::res://assets/interactables/cog1.png<>uid://ctqhsce3g273f::::res://scenes/platforms/one_way_platform.tscn<>uid://cd52tyrm0inde::::res://scenes/platforms/bounce_pad.tscn<>uid://nkx0ce5n8gi2::::res://scenes/platforms/moving_platforms.tscn
-::res://scenes/global/::1700757977
-global.tscn::PackedScene::576310035409294566::1700603405::0::1::::<><>::res://global.gd
-save_point.tscn::PackedScene::3366305971400955307::1700757977::0::1::::<><>::res://save_point.gd<>uid://cpub3jtogxl8g
-::res://scenes/music level/::1700789212
-music_program_level.gd::GDScript::-1::1700770532::0::1::::<>Node2D<>::
-music_program_level.tscn::PackedScene::515588478016919459::1700789212::0::1::::<><>::uid://bqq2fwny5ts4g::::res://assets/maps/music program/Scale_Maestro_v2.0.png<>res://scenes/music level/music_program_level.gd<>uid://xpqu81kechfg::::res://assets/other hazards/play_head.png<>uid://5wxyrcg7u0pa::::res://music/Maestro.ogg<>uid://cmrt30o7muylv::::res://scenes/player/Player.tscn<>uid://b2cv57ym4dkdx::::res://icon.svg<>uid://cyv64eyqamue4::::res://scenes/platforms/tile_maps.tscn<>uid://bxn0nfmbirlds::::res://scenes/platforms/rotating hazard.tscn<>uid://bn7wtkca1pr3x::::res://scenes/global/save_point.tscn
-::res://scenes/platforms/::1700789212
+desktop_map.tscn::PackedScene::8152719868528334177::1701119691::0::1::::<><>::res://scenes/desktop hub/desktop_map.gd<>uid://cmrt30o7muylv::::res://scenes/player/Player.tscn<>uid://d0gem12anbl1::::res://scenes/dektop/desktop.tscn<>uid://b1p10cth3sm3h::::res://assets/maps/windows/bg.png<>uid://xdb64wsfjr14::::res://assets/interactables/scale_maestro.png<>uid://capimax86vw1o::::res://assets/fonts/Windows Regular.ttf<>uid://c3xfx8ky602w7::::res://assets/interactables/cog0.png<>uid://bwynuwjhil7qx::::res://assets/interactables/cog1.png<>uid://ctqhsce3g273f::::res://scenes/platforms/one_way_platform.tscn<>uid://cd52tyrm0inde::::res://scenes/platforms/bounce_pad.tscn<>uid://nkx0ce5n8gi2::::res://scenes/platforms/moving_platforms.tscn
+::res://scenes/global/::1700858259
+global.tscn::PackedScene::576310035409294566::1700858259::0::1::::<><>::res://global.gd
+save_point.tscn::PackedScene::3366305971400955307::1700858259::0::1::::<><>::res://save_point.gd<>uid://cpub3jtogxl8g
+::res://scenes/music level/::1701119691
+music_program_level.gd::GDScript::-1::1700847209::0::1::::<>Node2D<>::
+music_program_level.tscn::PackedScene::515588478016919459::1701119691::0::1::::<><>::uid://bqq2fwny5ts4g::::res://assets/maps/music program/Scale_Maestro_v2.0.png<>res://scenes/music level/music_program_level.gd<>uid://xpqu81kechfg::::res://assets/other hazards/play_head.png<>uid://5wxyrcg7u0pa::::res://music/Maestro.ogg<>uid://cmrt30o7muylv::::res://scenes/player/Player.tscn<>uid://b2cv57ym4dkdx::::res://icon.svg<>uid://cyv64eyqamue4::::res://scenes/platforms/tile_maps.tscn<>uid://bxn0nfmbirlds::::res://scenes/platforms/rotating hazard.tscn<>uid://bn7wtkca1pr3x::::res://scenes/global/save_point.tscn
+::res://scenes/platforms/::1700858259
 bounce_pad.gd::GDScript::-1::1697994400::0::1::::<>Node2D<>::
 bounce_pad.tscn::PackedScene::5047013807212021678::1697994400::0::1::::<><>::uid://b2cv57ym4dkdx
 falling platform.tscn::PackedScene::1128841933938828805::1697994400::0::1::::<><>::uid://bcxim52y4b145
 hazard.tscn::PackedScene::2407239273270039925::1697994400::0::1::::<><>::uid://b2cv57ym4dkdx
 moving_platforms.gd::GDScript::-1::1697994400::0::1::::<>Node2D<>::
-moving_platforms.tscn::PackedScene::934539993123927131::1700789212::0::1::::<><>::res://scenes/platforms/moving_platforms.gd<>uid://b2cv57ym4dkdx::::res://icon.svg
+moving_platforms.tscn::PackedScene::934539993123927131::1700858258::0::1::::<><>::res://scenes/platforms/moving_platforms.gd<>uid://b2cv57ym4dkdx
 one_way_platform.tscn::PackedScene::6139916716320654197::1697994400::0::1::::<><>::uid://bcxim52y4b145
-rotating hazard.tscn::PackedScene::4029142419521759052::1700789212::0::1::::<><>::uid://b2cv57ym4dkdx::::res://icon.svg
-tile_maps.tscn::PackedScene::6502659810229405269::1700789212::0::1::::<><>::uid://xuyk8a11fp0o::::res://assets/platforms/mass0-Sheet (2).png<>uid://bcxim52y4b145::::res://assets/platforms/music_tile0.png
-::res://scenes/player/::1700789212
-Player.gd::GDScript::-1::1700770532::0::1::::<>CharacterBody2D<>::
-Player.tscn::PackedScene::5651406874135306059::1700789212::0::1::::<><>::res://scenes/player/Player.gd<>uid://b2cv57ym4dkdx::::res://icon.svg<>uid://dors4cr2kw6pl::::res://assets/player/move_flop0-Sheet.png<>uid://bjuoyi2kaispi::::res://assets/player/fishflop.png<>uid://bhrsym3dmkxkt::::res://assets/player/splat.png
+rotating hazard.tscn::PackedScene::4029142419521759052::1700858259::0::1::::<><>::uid://b2cv57ym4dkdx
+tile_maps.tscn::PackedScene::6502659810229405269::1700858258::0::1::::<><>::uid://xuyk8a11fp0o
+::res://scenes/player/::1701120069
+Player.gd::GDScript::-1::1701120068::0::1::::<>CharacterBody2D<>::
+Player.tscn::PackedScene::5651406874135306059::1701120068::0::1::::<><>::res://scenes/player/Player.gd<>uid://b2cv57ym4dkdx::::res://icon.svg<>uid://dors4cr2kw6pl::::res://assets/player/move_flop0-Sheet.png<>uid://bjuoyi2kaispi::::res://assets/player/fishflop.png<>uid://bhrsym3dmkxkt::::res://assets/player/splat.png
 ::res://scenes/power ups/::1697994400
 Dash.gd::GDScript::-1::1697994400::0::1::::<>Node2D<>::
 Dash.tscn::PackedScene::3704296301952480582::1697994400::0::1::::<><>::res://scenes/power ups/Dash.gd<>uid://cuj145jnwu8qt

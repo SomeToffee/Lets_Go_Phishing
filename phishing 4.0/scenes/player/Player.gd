@@ -31,6 +31,7 @@ var got_hit = false
 @onready var animated_sprite_roll : AnimatedSprite2D = $roll
 @onready var animated_sprite_idle : AnimatedSprite2D = $idle
 @onready var animated_sprite_wall_splat : AnimatedSprite2D = $wall_splat
+@onready var animated_sprite_wall_splat_left : AnimatedSprite2D = $wall_splat_left
 @onready var cayote_time = $cayote_time
 @onready var global = $"/root/Global"
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -41,7 +42,7 @@ var dash_direction : Vector2 = Vector2.ZERO
 @export var facingDirection = Vector2.RIGHT
 @export var stop = false
 var input_vector = Vector2.ZERO
-
+#var player_scale = self.scale.x
 #func _ready():# -> void:
 #	self.position = global.music_spawn_point
 
@@ -71,32 +72,21 @@ func _physics_process(delta):
 				move_lock = true
 				# Determine the wall jump direction based on player input.
 				var wall_jump_direction = Vector2.ZERO
-				if Input.is_action_pressed("left"):
+				if last_moved_dir == "left":
 					wall_jump_direction.x = 1  # Jump to the right
-				elif Input.is_action_pressed("right"):
+				elif last_moved_dir == "right":
 					wall_jump_direction.x = -1  # Jump to the left
 				wall_jump_direction.y = -1  # Jump upward
 
 				# Apply the wall jump force.
 				velocity = wall_jump_direction.normalized() * wall_jump_pushback
 				#print(velocity.x)
-				
-				
-	#	if is_dashing == true and is_dashing_bold == true:
-	#		self.modulate.g = 0
-	#		velocity = dash_direction.normalized() * 1500
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
+		
+		
 		if is_dashing == false or is_dashing_bold == true:
 			if not is_on_floor():
 				velocity.y += gravity * delta
 			direction = Input.get_vector("left", "right", "up", "down")
-			
-	#		if is_on_floor():
-	#			speed = 150
-	#		if not is_on_floor():
-	#			speed = 100
-
 			
 			
 			if move_lock == false and hit_lock == false:
@@ -107,16 +97,15 @@ func _physics_process(delta):
 		if got_hit == true:
 			got_hit = false
 			getting_hit()
-		
+		wall_stick()
+		facing_direction()
 		update_animation()
-#		update_animation_direction()
 		handle_dash(delta)
 		bold()
 		wall_slide(delta)
-		facing_direction()
 		player_flip()
-	
-	
+
+		
 func update_animation():
 	if not animation_locked:
 		if !is_on_wall():
@@ -124,6 +113,7 @@ func update_animation():
 				animated_sprite_roll.visible = true
 				animated_sprite_idle.visible = false
 				animated_sprite_wall_splat.visible = false
+				animated_sprite_wall_splat_left.visible = false
 				animated_sprite_roll.play("roll")
 			elif direction.x == 0 and !is_on_floor() and !is_on_wall():
 #				if last_moved_dir == "left":
@@ -133,6 +123,7 @@ func update_animation():
 				animated_sprite_roll.visible = true
 				animated_sprite_idle.visible = false
 				animated_sprite_wall_splat.visible = false
+				animated_sprite_wall_splat_left.visible = false
 				animated_sprite_roll.play("roll")
 			else:
 #				if last_moved_dir == "left":
@@ -142,49 +133,47 @@ func update_animation():
 				animated_sprite_roll.visible = false
 				animated_sprite_idle.visible = true
 				animated_sprite_wall_splat.visible = false
+				animated_sprite_wall_splat_left.visible = false
 				animated_sprite_idle.play("idle")
 		if is_on_wall() and !is_on_floor():
-			animated_sprite_roll.visible = false
-			animated_sprite_idle.visible = false
-			animated_sprite_wall_splat.visible = true
-			animated_sprite_wall_splat.play("default")
-			await get_tree().create_timer(0.2).timeout
-			animated_sprite_wall_splat.set_frame(2)
-		
+			if last_moved_dir == "right" and !animated_sprite_wall_splat_left.visible:
+				animated_sprite_roll.visible = false
+				animated_sprite_idle.visible = false
+				animated_sprite_wall_splat.visible = true
+				animated_sprite_wall_splat_left.visible = false
+				animated_sprite_wall_splat.play("default")
+				await get_tree().create_timer(0.2).timeout
+				animated_sprite_wall_splat.set_frame(2)
+			if last_moved_dir == "left" and !animated_sprite_wall_splat.visible:
+				animated_sprite_roll.visible = false
+				animated_sprite_idle.visible = false
+				animated_sprite_wall_splat.visible = false
+				animated_sprite_wall_splat_left.visible = true
+				animated_sprite_wall_splat_left.play("default")
+				await get_tree().create_timer(0.2).timeout
+				animated_sprite_wall_splat_left.set_frame(2)
 
-#func update_animation_direction():
-#	if not animation_locked:
-#		if facingDirection.x > 0 and self.scale.x != 0.9:
-#			self.scale.x = 0.9
-#			#animated_sprite_roll.flip_h = false
-#		elif facingDirection.x < 0 and self.scale.x != 0.9:
-#			self.scale.x = -0.9
-#		else:
-#			self.scale.x = 0.9
-#			#animated_sprite_roll.flip_h = true
-#omnidirectional dash
 func facing_direction():
 	if Input.is_action_pressed("right"):
-		input_vector.x += 1
+		input_vector.x = 1
 	if Input.is_action_pressed("left"):
-		input_vector.x -= 1
+		input_vector.x = -1
 
 	if input_vector != Vector2.ZERO:
 		input_vector = input_vector.normalized()
-	print(input_vector)
+	#print(input_vector)
 	if direction.x > 0:
 		last_moved_dir = "right"
 	if direction.x < 0:
 		last_moved_dir = "left"
-	
+
 func player_flip():
-#	if last_moved_dir == "right" and self.scale.x != 0.9:
-#		self.scale.x = 0.9
-#	if last_moved_dir == "left" and self.scale.x != -0.9:
-#		self.scale.x = -0.9
-#	print(self.scale.x)
-	if Input.is_action_just_pressed("paste"):
-		self.scale.x *= -1
+	if last_moved_dir == "left":
+		animated_sprite_idle.flip_h = true
+		animated_sprite_roll.flip_h = true
+	if last_moved_dir == "right":
+		animated_sprite_idle.flip_h = false
+		animated_sprite_roll.flip_h = false
 
 func handle_dash(delta):
 	if is_on_floor() or is_on_wall():
@@ -297,6 +286,8 @@ func fish_hurtbox_manager():
 		$hurt_box/roll_box.disabled = true
 		$wall_splat_collison.disabled = true
 		$hurt_box/wall_splat_box.disabled = true
+		$wall_splat_collison_left.disabled = true
+		$hurt_box/wall_splat_box_left.disabled = true
 	elif animated_sprite_roll.visible == true:
 		$idle_collision.disabled = true
 		$hurt_box/idle_box.disabled = true
@@ -304,6 +295,8 @@ func fish_hurtbox_manager():
 		$hurt_box/roll_box.disabled = false
 		$wall_splat_collison.disabled = true
 		$hurt_box/wall_splat_box.disabled = true
+		$wall_splat_collison_left.disabled = true
+		$hurt_box/wall_splat_box_left.disabled = true
 	elif animated_sprite_wall_splat.visible == true:
 		$idle_collision.disabled = true
 		$hurt_box/idle_box.disabled = true
@@ -311,3 +304,25 @@ func fish_hurtbox_manager():
 		$hurt_box/roll_box.disabled = true
 		$wall_splat_collison.disabled = false
 		$hurt_box/wall_splat_box.disabled = false
+		$wall_splat_collison_left.disabled = true
+		$hurt_box/wall_splat_box_left.disabled = true
+	elif animated_sprite_wall_splat_left.visible == true:
+		$idle_collision.disabled = true
+		$hurt_box/idle_box.disabled = true
+		$roll_collision.disabled = true
+		$hurt_box/roll_box.disabled = true
+		$wall_splat_collison.disabled = true
+		$hurt_box/wall_splat_box.disabled = true
+		$wall_splat_collison_left.disabled = false
+		$hurt_box/wall_splat_box_left.disabled = false
+
+#func wall_stick():
+#	if animated_sprite_wall_splat.visible and Input.is_action_just_pressed("left"):
+#		velocity.x = 0
+#func get_which_wall_collided():
+#	for i in range(get_slide_collision_count()):
+#		var collision = get_slide_collision(i)
+#		if collision.normal.x > 0:
+#			return "left"
+#		elif collision.normal.x < 0:
+#			return "right"

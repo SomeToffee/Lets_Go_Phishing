@@ -180,16 +180,6 @@ libraries = {
 
 [node name="Player" parent="." instance=ExtResource("2_fjy1n")]
 position = Vector2(315, 183)
-speed = null
-jump_velocity = null
-wall_jump_pushback = null
-wall_slide_gravity = null
-wall_sliding = null
-gravity = null
-dash_speed = null
-HP = null
-facingDirection = null
-stop = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 scale = Vector2(1.25, 1.25)

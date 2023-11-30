@@ -157,7 +157,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_an0od"]
-radius = 5.7778
+radius = 6.0
 height = 36.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_velkc"]
@@ -236,14 +236,12 @@ sprite_frames = SubResource("SpriteFrames_ju2mj")
 animation = &"idle"
 
 [node name="wall_splat" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(11.1111, 5.55556)
 sprite_frames = SubResource("SpriteFrames_ycp4q")
 frame = 2
 frame_progress = 1.0
 
 [node name="wall_splat_left" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(-9, 5)
 sprite_frames = SubResource("SpriteFrames_ycp4q")
 frame = 2

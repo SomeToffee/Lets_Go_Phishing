@@ -1,13 +1,6 @@
-res://misc/root.tscn
 res://scenes/player/Player.tscn
-res://scenes/platforms/tile_maps.tscn
-res://scenes/platforms/moving_platforms.tscn
+res://scenes/player/Player.gd
+res://misc/root.tscn
 res://scenes/desktop hub/desktop_map.tscn
 res://scenes/music level/music_program_level.tscn
-res://scenes/platforms/rotating hazard.tscn
-res://scenes/global/global.tscn
-res://global.gd
-res://scenes/player/Player.gd
-res://save_point.gd
-res://scenes/music level/music_program_level.gd
-res://scenes/global/save_point.tscn
+res://scenes/desktop hub/desktop_map.gd

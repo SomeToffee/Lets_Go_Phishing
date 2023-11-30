@@ -23,29 +23,13 @@ func _physics_process(_delta):
 		music_window.visible = true
 		music_enterance.disabled = true
 		blue_boarder.visible = true
-#		control.position.x = camera.position.x
-#		control.position.y = camera.position.y
 	else:
 		camera.enabled = false
-#	print(view.position.x)
-	
 	get_viewport_rect()
 
 
 func _on_area_2d_body_entered(_body):
-	#clip_mask.add_child(open_level)
 	are_in_level = true
 	position_node.add_child(open_level)
-#	open_level.position.x = 10
-#	open_level.position.y = 14
-	#player.position.x = 315
-	#player.position.y = 180
 	camera.enabled = true
-	#player.z_index = 5
 	player.queue_free()
-
-
-#func _on_player_player_moved():
-#	if are_in_level == true:
-#		control.position.x = player.position.x + -300
-#		control.position.y = player.position.y + -160
