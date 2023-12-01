@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://buhjtyinnapce"]
+
+[ext_resource type="Script" path="res://scenes/platforms/dash_refresh.gd" id="1_32wbe"]
+[ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="2_rdb8j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b1r52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rdb8j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xkv7w"]
+
+[node name="dash_refresh" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_32wbe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(0.15625, 0.140625)
+sprite_frames = SubResource("SpriteFrames_b1r52")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xkv7w")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

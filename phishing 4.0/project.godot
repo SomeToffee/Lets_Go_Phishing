@@ -87,6 +87,7 @@ pause={
 
 2d_physics/layer_1="ground"
 2d_physics/layer_2="music level open"
+2d_physics/layer_3="dash_reset"
 2d_physics/layer_4="activate_platform_movement"
 2d_physics/layer_8="hurtbox"
 2d_physics/layer_10="save"

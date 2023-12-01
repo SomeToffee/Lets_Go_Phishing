@@ -14,7 +14,7 @@ extends CharacterBody2D
 
 var follow = 1
 var is_dashing : bool = false # check if we're dashing
-var can_dash : bool = true # check if we can dash? 
+@export var can_dash : bool = true # check if we can dash? 
 var is_wall_jumping : bool = false
 var move_lock : bool = false
 var is_bold : bool = false
@@ -68,7 +68,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump"):
 			if is_on_floor() || !cayote_time.is_stopped():
 				velocity.y = jump_velocity
-			if is_on_wall():
+			if is_on_wall() and !is_on_floor():
 				move_lock = true
 				# Determine the wall jump direction based on player input.
 				var wall_jump_direction = Vector2.ZERO
@@ -97,7 +97,7 @@ func _physics_process(delta):
 		if got_hit == true:
 			got_hit = false
 			getting_hit()
-		wall_stick()
+#		wall_stick()
 		facing_direction()
 		update_animation()
 		handle_dash(delta)
@@ -326,3 +326,7 @@ func fish_hurtbox_manager():
 #			return "left"
 #		elif collision.normal.x < 0:
 #			return "right"
+
+
+func _on_dash_refresh_area_entered(area):
+	can_dash = true

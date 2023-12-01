@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cmrt30o7muylv"]
+[gd_scene load_steps=39 format=3 uid="uid://cmrt30o7muylv"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_k55ba"]
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="3_f33wk"]
@@ -209,20 +209,13 @@ size = Vector2(34.7778, 27.7778)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w8jk"]
 size = Vector2(8.88889, 33.3333)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddd3l"]
+size = Vector2(35, 31)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 523
 collision_mask = 523
 script = ExtResource("1_k55ba")
-speed = null
-jump_velocity = null
-wall_jump_pushback = null
-wall_slide_gravity = null
-wall_sliding = null
-gravity = null
-dash_speed = null
-HP = null
-facingDirection = null
-stop = null
 
 [node name="roll" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iam20")
@@ -300,4 +293,13 @@ shape = SubResource("RectangleShape2D_2w8jk")
 position = Vector2(-13, 1)
 shape = SubResource("RectangleShape2D_2w8jk")
 
+[node name="dash_refresh" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dash_refresh"]
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_ddd3l")
+
 [connection signal="body_entered" from="hurt_box" to="." method="_on_hurt_box_body_entered"]
+[connection signal="area_entered" from="dash_refresh" to="." method="_on_dash_refresh_area_entered"]
