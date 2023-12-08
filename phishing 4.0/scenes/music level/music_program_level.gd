@@ -31,13 +31,13 @@ func _physics_process(delta):
 func move_camera():
 	var add = 100
 	if player.facingDirection[0] > 0:
-		add = 75
+		add = 100
 	else:
-		add = -75
+		add = -100
 	var diff = player.global_position - p_camera.global_position
 	diff.x += add
 	diff = diff/15
-	diff = diff.limit_length(2 + abs(player.velocity.x/50) + abs(player.velocity.y/50))
+	diff = diff.limit_length(5)
 	p_camera.global_position += diff
 
 func set_playhead_pos():

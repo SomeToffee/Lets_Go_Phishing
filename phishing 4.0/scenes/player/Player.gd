@@ -37,7 +37,7 @@ var got_hit = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var animation_locked : bool = false
-@export var direction : Vector2 = Vector2.ZERO
+var direction : Vector2 = Vector2.ZERO
 var dash_direction : Vector2 = Vector2.ZERO
 @export var facingDirection = Vector2.RIGHT
 @export var stop = false

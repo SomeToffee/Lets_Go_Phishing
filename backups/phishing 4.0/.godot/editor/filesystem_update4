@@ -1,7 +1,0 @@
-res://misc/root.tscn
-res://scenes/player/Player.tscn
-res://scenes/platforms/tile_maps.tscn
-res://scenes/platforms/moving_platforms.tscn
-res://scenes/desktop hub/desktop_map.tscn
-res://scenes/music level/music_program_level.tscn
-res://scenes/platforms/rotating hazard.tscn
