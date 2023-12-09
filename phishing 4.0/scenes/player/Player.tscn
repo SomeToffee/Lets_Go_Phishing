@@ -1,10 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmrt30o7muylv"]
+[gd_scene load_steps=43 format=3 uid="uid://cmrt30o7muylv"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_k55ba"]
 [ext_resource type="Texture2D" uid="uid://b2cv57ym4dkdx" path="res://icon.svg" id="3_f33wk"]
 [ext_resource type="Texture2D" uid="uid://dors4cr2kw6pl" path="res://assets/player/move_flop0-Sheet.png" id="3_ilt55"]
 [ext_resource type="Texture2D" uid="uid://bjuoyi2kaispi" path="res://assets/player/fishflop.png" id="3_w28dj"]
 [ext_resource type="Texture2D" uid="uid://bhrsym3dmkxkt" path="res://assets/player/splat.png" id="4_iejeg"]
+[ext_resource type="Texture2D" uid="uid://co0tein2tdjsx" path="res://assets/player/skid0-Sheet.png" id="5_7x26s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_woiep"]
 atlas = ExtResource("3_ilt55")
@@ -156,6 +157,28 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu608"]
+atlas = ExtResource("5_7x26s")
+region = Rect2(0, 0, 41, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqwqw"]
+atlas = ExtResource("5_7x26s")
+region = Rect2(41, 0, 41, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2uul8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu608")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqwqw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_an0od"]
 radius = 5.7778
 height = 36.0
@@ -218,12 +241,12 @@ collision_mask = 523
 script = ExtResource("1_k55ba")
 
 [node name="roll" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_iam20")
 animation = &"roll"
 frame_progress = 0.897073
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(0, 6.66667)
 sprite_frames = SubResource("SpriteFrames_ju2mj")
 animation = &"idle"
@@ -243,20 +266,30 @@ frame = 2
 frame_progress = 1.0
 flip_h = true
 
+[node name="ground_slide" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 5)
+sprite_frames = SubResource("SpriteFrames_2uul8")
+frame = 1
+frame_progress = 0.473914
+
 [node name="idle_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 12.2222)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_an0od")
 
 [node name="roll_collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.38889, 3.88889)
 shape = SubResource("RectangleShape2D_velkc")
 
 [node name="wall_splat_collison" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(13.3333, 1.11111)
 shape = SubResource("RectangleShape2D_74fsu")
 
 [node name="wall_splat_collison_left" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-12.6111, 1.11111)
 shape = SubResource("RectangleShape2D_74fsu")
 
@@ -278,18 +311,22 @@ collision_mask = 128
 collision_priority = 50.0
 
 [node name="idle_box" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 position = Vector2(0.555555, 12.2222)
 shape = SubResource("RectangleShape2D_mrmq1")
 
 [node name="roll_box" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 position = Vector2(0.38889, 3.88889)
 shape = SubResource("RectangleShape2D_vws5u")
 
 [node name="wall_splat_box" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 position = Vector2(13.3333, 1.11111)
 shape = SubResource("RectangleShape2D_2w8jk")
 
 [node name="wall_splat_box_left" type="CollisionShape2D" parent="hurt_box"]
+visible = false
 position = Vector2(-13, 1)
 shape = SubResource("RectangleShape2D_2w8jk")
 

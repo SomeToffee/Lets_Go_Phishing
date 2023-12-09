@@ -92,8 +92,9 @@ func _physics_process(delta):
 			if move_lock == false and hit_lock == false:
 				if direction:
 					velocity.x = direction.x * speed
-				else:
-					velocity.x = move_toward(velocity.x, 0, speed)
+				velocity.x *= 0.9
+#				else:
+#					velocity.x = move_toward(velocity.x, 0, 0.5)
 		if got_hit == true:
 			got_hit = false
 			getting_hit()
